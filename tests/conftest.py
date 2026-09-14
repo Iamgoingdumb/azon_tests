@@ -1,9 +1,6 @@
 #tests/conftest.py
-from site import register_readline
-
 import requests
 import pytest
-from requests import session
 
 from api.api_manager import ApiManager
 from data.users import UserData
