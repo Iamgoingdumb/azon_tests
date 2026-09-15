@@ -4,6 +4,8 @@ from api.payment_api import PaymentAPI
 from api.products_api import ProductAPI
 from api.user_api import UserAPI
 from api.api_categories import CategoriesAPI
+
+
 class ApiManager:
     """Единая точка доступа ко всем API стенда"""
 
