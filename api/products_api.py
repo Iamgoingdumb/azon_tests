@@ -19,3 +19,8 @@ class ProductAPI(CustomRequester):
         return self.send_request(
             "GET", f"{self.PRODUCT_ENDPOINT}/{product_id}",expected_status=expected_status
         )
+
+    def create_product(self,product_data, expected_status=201):
+        return self.send_request(
+            "POST", self.PRODUCT_ENDPOINT,json=product_data, expected_status=expected_status
+        )
