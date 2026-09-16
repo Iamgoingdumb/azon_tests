@@ -21,7 +21,7 @@ class DataGenerator:
         return fake.name()
 
     @staticmethod
-    def generate_gadget_name():
+    def generate_product_name():
         return f"Лампа AZON {uuid.uuid4().hex[:4]}"
 
     @staticmethod
@@ -30,7 +30,7 @@ class DataGenerator:
 
     @staticmethod
     def generate_description():
-         return fake.sentence(nb_words=8)
+        return fake.sentence(nb_words=8)
 
     @staticmethod
     def generate_price():
