@@ -24,3 +24,21 @@ class ProductAPI(CustomRequester):
         return self.send_request(
             "POST", self.PRODUCT_ENDPOINT,json=product_data, expected_status=expected_status
         )
+
+    def update_product(self, product_id, product_data, expected_status=200):
+        return self.send_request(
+            "PATCH", f"{self.PRODUCT_ENDPOINT}/{product_id}", json=product_data,
+            expected_status=expected_status
+        )
+
+    def update_price(self, product_id, price_data, expected_status=200):
+        return self.send_request(
+            "PATCH", f"{self.PRODUCT_ENDPOINT}/{product_id}/price", json=price_data,
+            expected_status=expected_status
+        )
+
+    def delete_product(self, product_id, expected_status=204):
+        return self.send_request(
+            "DELETE", f"{self.PRODUCT_ENDPOINT}/{product_id}", expected_status=expected_status
+        )
+
