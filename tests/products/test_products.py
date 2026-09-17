@@ -37,3 +37,10 @@ class TestProducts:
         response = api_manager.products_api.get_product(uuid.uuid4(), expected_status=404)
 
         assert response.json()["error"]["code"] == "PRODUCT_NOT_FOUND"
+
+    def test_created_product_is_available(self, api_manager, created_product):
+        product_id = created_product["id"]
+
+        response = api_manager.products_api.get_product(product_id)
+
+        assert response.json()["id"] == product_id, "id товара не совпало"
