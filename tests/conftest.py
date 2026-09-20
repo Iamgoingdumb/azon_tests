@@ -74,9 +74,39 @@ def category_id(api_manager):
     return categories[-1]["id"]
 
 @pytest.fixture
-def created_product(api_manager, authenticated_admin, category_id):
+def created_product(admin_manager , category_id):
     product_data = ProductData.creation_product_data(category_id)
-    response = api_manager.products_api.create_product(product_data)
+    response = admin_manager.products_api.create_product(product_data)
     product = {**product_data, "id": response.json()["id"]}
     yield product
-    api_manager.products_api.delete_product(product["id"])
+    admin_manager.products_api.delete_product(product["id"])
+
+@pytest.fixture
+def admin_manager():
+    admin_session = requests.Session()
+    manager = ApiManager(admin_session)
+
+    admin_credentials = UserData.registration_admin_data()
+
+    manager.auth_api.register_user(admin_credentials)
+
+    manager.auth_api.authenticate((admin_credentials["email"], admin_credentials["password"]))
+
+    yield manager
+
+    admin_session.close()
+
+@pytest.fixture
+def seed_product_id(api_manager):
+    params = {
+        "search": "Умные часы AZON Watch 5",
+        "price_min": 5499,
+        "in_stock": True,
+        "page": 1,
+        "size": 20,
+    }
+
+    response = api_manager.products_api.get_products(params)
+
+    product_id = response.json()["items"][0]["id"]
+    return product_id
