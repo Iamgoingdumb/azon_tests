@@ -1,5 +1,6 @@
 from utils.data_generator import DataGenerator
 
+from config.credentials import MANAGER_INVITE_CODE, ADMIN_INVITE_CODE
 
 class UserData:
     """Object Mother для тел запросов Auth API"""
@@ -10,6 +11,24 @@ class UserData:
             "email": DataGenerator.generate_email(),
             "password": DataGenerator.generate_password(),
             "full_name": DataGenerator.generate_full_name(),
+        }
+
+    @staticmethod
+    def registration_admin_data() -> dict:
+        return {
+            "email": DataGenerator.generate_email(),
+            "password": DataGenerator.generate_password(),
+            "full_name": DataGenerator.generate_full_name(),
+            "invite_code": ADMIN_INVITE_CODE,
+        }
+
+    @staticmethod
+    def registration_manager_data() -> dict:
+        return {
+            "email": DataGenerator.generate_email(),
+            "password": DataGenerator.generate_password(),
+            "full_name": DataGenerator.generate_full_name(),
+            "invite_code": MANAGER_INVITE_CODE,
         }
 
     @staticmethod
